@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Nodejs检测端口是否被占用 | Ansen博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="开启本地服务时，有这么一种情况：当前端口已经被另一个项目使用了，导致服务开启失败。那么接下来，我们通过简简单单的十行代码来检测端口是否已经被占用。
+思路想要知道端口是否被占用，我们可以开启一个新的服务并监听该端口，若开启成功则说明端口未被占用，反之该端口已经被其他程序使用了。基本思路有了，下面我们开始编写代码。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nodejs检测端口是否被占用">
+<meta property="og:url" content="http://ansenhuang.github.io/2016/04/11/nodejs-port-is-occupied/index.html">
+<meta property="og:site_name" content="Ansen博客">
+<meta property="og:description" content="开启本地服务时，有这么一种情况：当前端口已经被另一个项目使用了，导致服务开启失败。那么接下来，我们通过简简单单的十行代码来检测端口是否已经被占用。
+思路想要知道端口是否被占用，我们可以开启一个新的服务并监听该端口，若开启成功则说明端口未被占用，反之该端口已经被其他程序使用了。基本思路有了，下面我们开始编写代码。">
+<meta property="og:updated_time" content="2016-04-17T11:33:15.836Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nodejs检测端口是否被占用">
+<meta name="twitter:description" content="开启本地服务时，有这么一种情况：当前端口已经被另一个项目使用了，导致服务开启失败。那么接下来，我们通过简简单单的十行代码来检测端口是否已经被占用。
+思路想要知道端口是否被占用，我们可以开启一个新的服务并监听该端口，若开启成功则说明端口未被占用，反之该端口已经被其他程序使用了。基本思路有了，下面我们开始编写代码。">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Ansen</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">低调做人, 高调做事</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/works">作品展示</a></li>
+				        
+							<li><a href="/aboutme">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ansenhuang/" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://zhihu.com/people/ansenhuang/" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="mailto:ancheng1992@126.com" title="mail">mail</a>
+					        
+								<a class="linkedin" target="_blank" href="http://www.linkedin.com/in/%E5%AE%89%E7%A8%8B-%E9%BB%84-447a2a110?trk=nav_responsive_tab_profile" title="linkedin">linkedin</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://div.io/user/ansenhuang/">DIV.IO</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://segmentfault.com/blog/ansenhuang/">segmentfault</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Ansen</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Ansen</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">低调做人, 高调做事</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/works">作品展示</a></li>
+		        
+					<li><a href="/aboutme">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ansenhuang/" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://zhihu.com/people/ansenhuang/" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:ancheng1992@126.com" title="mail">mail</a>
+			        
+						<a class="linkedin" target="_blank" href="http://www.linkedin.com/in/%E5%AE%89%E7%A8%8B-%E9%BB%84-447a2a110?trk=nav_responsive_tab_profile" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-nodejs-port-is-occupied" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/11/nodejs-port-is-occupied/" class="article-date">
+  	<time datetime="2016-04-10T16:00:00.000Z" itemprop="datePublished">2016-04-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Nodejs检测端口是否被占用
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>开启本地服务时，有这么一种情况：当前端口已经被另一个项目使用了，导致服务开启失败。<br>那么接下来，我们通过简简单单的十行代码来检测端口是否已经被占用。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>想要知道端口是否被占用，我们可以开启一个新的服务并监听该端口，若开启成功则说明端口未被占用，反之该端口已经被其他程序使用了。<br>基本思路有了，下面我们开始编写代码。</p>
+<a id="more"></a>
+<h2 id="基础代码"><a href="#基础代码" class="headerlink" title="基础代码"></a>基础代码</h2><p><code>portIsOccupied.js</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检测端口是否被占用</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">portIsOccupied</span> (<span class="params">port</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 创建服务并监听该端口</span></span><br><span class="line">  <span class="keyword">var</span> server = net.createServer().listen(port)</span><br><span class="line"></span><br><span class="line">  server.on(<span class="string">'listening'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="comment">// 执行这块代码说明端口未被占用</span></span><br><span class="line">    server.close() <span class="comment">// 关闭服务</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'The port【'</span> + port + <span class="string">'】 is available.'</span>) <span class="comment">// 控制台输出信息</span></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  server.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (err.code === <span class="string">'EADDRINUSE'</span>) &#123; <span class="comment">// 端口已经被使用</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'The port【'</span> + port + <span class="string">'】 is occupied, please change other port.'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行</span></span><br><span class="line">portIsOccupied(<span class="number">1987</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>执行 <code>node portIsOccupied.js</code>，正常情况下会输出 <code>The port【1987】 is available.</code></p>
+<p>使用ssr将当前目录设置成静态服务器，关于ssr的使用可以在这里找到 <a href="https://github.com/jaywcjlove/ssr" target="_blank" rel="external">https://github.com/jaywcjlove/ssr</a>，<br>ssr默认会开启 <code>1987</code> 端口。</p>
+<p>这时，再次执行 <code>node portIsOccupied.js</code>，输出 <code>The port【1987】 is occupied, please change other port.</code></p>
+<h2 id="让程序更加完美"><a href="#让程序更加完美" class="headerlink" title="让程序更加完美"></a>让程序更加完美</h2><p>到这里为止，我们已经能够检测端口是否被占用。<br>但是，假如我要检测另外一个端口，每次都得更改文件的端口号，相当的麻烦。<br>那么有没有更加完美的实现方法呢？当然有！</p>
+<p>Nodejs中，有这么一个好玩的东西 <code>process.argv</code>，它是一个数组，前两个值分别是node程序所在位置和当前运行的文件所在位置。<br>神奇的是，我们运行程序时，所传的参数可以通过 <code>process.argv</code> 得到。<br>比如这样子 <code>node portIsOccupied.js -p 1987</code>，那么会将 -p 和 1987 添加到 <code>process.argv</code> 数组的末尾。<br>知道了原理，下面我们来编写更加完美的程序吧。</p>
+<h2 id="控制台给程序传参"><a href="#控制台给程序传参" class="headerlink" title="控制台给程序传参"></a>控制台给程序传参</h2><p>修改 <code>portIsOccupied(1987)</code> 为：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> port = <span class="number">80</span> <span class="comment">// 默认检测80端口</span></span><br><span class="line"><span class="keyword">if</span> (process.argv[<span class="number">2</span>] === <span class="string">'-p'</span>) &#123;</span><br><span class="line">  port = <span class="built_in">parseInt</span>(process.argv[<span class="number">3</span>])</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">portIsOccupied(port)</span><br></pre></td></tr></table></figure>
+<p>执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node portIsOccupied.js -p [port]</span><br></pre></td></tr></table></figure></p>
+<p>其中 [port] 是你想要检测的端口。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/04/11/interesting-window-active/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">有趣的浏览器活跃窗口监听</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'ansenhuang'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Ansen
+        
+        本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+        
+    	</div>
+      <div class="footer-right">
+    		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+    	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  </div>
+</body>
+</html>

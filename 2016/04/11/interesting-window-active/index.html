@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>有趣的浏览器活跃窗口监听 | Ansen博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="window.onblur &amp;amp; window.onfocus在浏览器中，有这样两个事件监听 window.onblur &amp;amp; window.onfocus，分别表示的是窗口失去焦点和窗口处于活跃状态，什么意思呢？
+即在你浏览其他窗口页面、或是浏览器最小化、又或是点击了其他程序等等，都算是浏览器窗口失去焦点，那么 window.onblur 事件就会触发。同样的，当你回到该窗口浏览网页">
+<meta property="og:type" content="article">
+<meta property="og:title" content="有趣的浏览器活跃窗口监听">
+<meta property="og:url" content="http://ansenhuang.github.io/2016/04/11/interesting-window-active/index.html">
+<meta property="og:site_name" content="Ansen博客">
+<meta property="og:description" content="window.onblur &amp;amp; window.onfocus在浏览器中，有这样两个事件监听 window.onblur &amp;amp; window.onfocus，分别表示的是窗口失去焦点和窗口处于活跃状态，什么意思呢？
+即在你浏览其他窗口页面、或是浏览器最小化、又或是点击了其他程序等等，都算是浏览器窗口失去焦点，那么 window.onblur 事件就会触发。同样的，当你回到该窗口浏览网页">
+<meta property="og:updated_time" content="2016-04-17T11:35:10.629Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="有趣的浏览器活跃窗口监听">
+<meta name="twitter:description" content="window.onblur &amp;amp; window.onfocus在浏览器中，有这样两个事件监听 window.onblur &amp;amp; window.onfocus，分别表示的是窗口失去焦点和窗口处于活跃状态，什么意思呢？
+即在你浏览其他窗口页面、或是浏览器最小化、又或是点击了其他程序等等，都算是浏览器窗口失去焦点，那么 window.onblur 事件就会触发。同样的，当你回到该窗口浏览网页">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Ansen</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">低调做人, 高调做事</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/works">作品展示</a></li>
+				        
+							<li><a href="/aboutme">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ansenhuang/" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://zhihu.com/people/ansenhuang/" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="mailto:ancheng1992@126.com" title="mail">mail</a>
+					        
+								<a class="linkedin" target="_blank" href="http://www.linkedin.com/in/%E5%AE%89%E7%A8%8B-%E9%BB%84-447a2a110?trk=nav_responsive_tab_profile" title="linkedin">linkedin</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://div.io/user/ansenhuang/">DIV.IO</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://segmentfault.com/blog/ansenhuang/">segmentfault</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Ansen</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Ansen</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">低调做人, 高调做事</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/works">作品展示</a></li>
+		        
+					<li><a href="/aboutme">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ansenhuang/" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://zhihu.com/people/ansenhuang/" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:ancheng1992@126.com" title="mail">mail</a>
+			        
+						<a class="linkedin" target="_blank" href="http://www.linkedin.com/in/%E5%AE%89%E7%A8%8B-%E9%BB%84-447a2a110?trk=nav_responsive_tab_profile" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-interesting-window-active" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/11/interesting-window-active/" class="article-date">
+  	<time datetime="2016-04-10T16:00:00.000Z" itemprop="datePublished">2016-04-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      有趣的浏览器活跃窗口监听
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="window-onblur-amp-window-onfocus"><a href="#window-onblur-amp-window-onfocus" class="headerlink" title="window.onblur &amp; window.onfocus"></a>window.onblur &amp; window.onfocus</h2><p>在浏览器中，有这样两个事件监听 <code>window.onblur</code> &amp; <code>window.onfocus</code>，<br>分别表示的是窗口失去焦点和窗口处于活跃状态，什么意思呢？</p>
+<p>即在你浏览其他窗口页面、或是浏览器最小化、又或是点击了其他程序等等，都算是浏览器窗口失去焦点，那么 <code>window.onblur</code> 事件就会触发。<br>同样的，当你回到该窗口浏览网页，该窗口就处于活跃状态，相应的 <code>window.onfocus</code> 事件也会触发。</p>
+<p>那么我们可以利用这两个事件做哪些有趣的东西呢？</p>
+<a id="more"></a>
+<h2 id="让网页标题变得有趣"><a href="#让网页标题变得有趣" class="headerlink" title="让网页标题变得有趣"></a>让网页标题变得有趣</h2><p>首先来我的博客感受一下吧，地址：<a href="http://ansenhuang.github.io/">安生博客</a>，<br>打开网页之后，点击其他窗口，然后再次回到安生博客，期间请注意网页标题的变化，是不是很好玩。<br>没错，玩的就是心机，让你不看我的博客哈哈。</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>代码非常地简单，以致于你不得不感叹世界真的很奇妙。<br>接下来将是一段愉悦的时光，因为马上我就要把我的全世界摆在你的面前了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> title = <span class="built_in">document</span>.title</span><br><span class="line">  <span class="built_in">window</span>.onblur = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">document</span>.title = <span class="string">'网页崩溃了，快看！'</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">window</span>.onfocus = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">document</span>.title = title</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+<p>将以上代码放在你的html文件中即可。</p>
+<h2 id="更新于2016-04-12"><a href="#更新于2016-04-12" class="headerlink" title="更新于2016-04-12"></a>更新于2016-04-12</h2><p>HMML5 API提供一个更加友好的方式来实现以上效果。</p>
+<p><code>document.hidden</code> 判断网页窗口是否处于用户浏览的状态。</p>
+<p><code>visibilitychange</code> 用于监听窗口可见性的变化。</p>
+<p>考虑到兼容性，代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> title = <span class="built_in">document</span>.title <span class="comment">// 保存网页当前的标题</span></span><br><span class="line">  <span class="comment">// 各种浏览器兼容</span></span><br><span class="line">  <span class="keyword">var</span> hidden, visibilityChange</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">document</span>.hidden !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">    hidden = <span class="string">'hidden'</span></span><br><span class="line">    visibilityChange = <span class="string">'visibilitychange'</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">document</span>.webkitHidden !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">    hidden = <span class="string">'webkitHidden'</span></span><br><span class="line">    visibilityChange = <span class="string">'webkitvisibilitychange'</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">document</span>.mozHidden !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">    hidden = <span class="string">'mozHidden'</span></span><br><span class="line">    visibilityChange = <span class="string">'mozvisibilitychange'</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">document</span>.msHidden !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">    hidden = <span class="string">'msHidden'</span></span><br><span class="line">    visibilityChange = <span class="string">'msvisibilitychange'</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 添加监听器，在title里显示状态变化</span></span><br><span class="line">  <span class="built_in">document</span>.addEventListener(visibilityChange, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>[hidden]) &#123;</span><br><span class="line">      <span class="built_in">document</span>.title = <span class="string">'网页崩溃了，快看！'</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">document</span>.title = title</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, <span class="literal">false</span>)</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
+<h2 id="全文终"><a href="#全文终" class="headerlink" title="全文终"></a>全文终</h2>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/04/11/nodejs-port-is-occupied/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Nodejs检测端口是否被占用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/10/python-spider-zhihu-users/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Scrapy爬虫 - 获取知乎用户数据</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'ansenhuang'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Ansen
+        
+        本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+        
+    	</div>
+      <div class="footer-right">
+    		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+    	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  </div>
+</body>
+</html>
