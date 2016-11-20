@@ -1,0 +1,8 @@
+@import './github-markdown.pcss';
+@import './pilcrow.pcss';
+@import '../highlight/github-gist.css';
+
+.markdown-body{
+  padding-left: 0;
+  margin-bottom: 15px;
+}
