@@ -1,0 +1,60 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100px;
+  overflow-y: scroll;
+}
+
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  background-color: #fff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+p,
+hr,
+table,
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #2db7f5;
+  text-decoration: none;
+  outline: none;
+}
+
+button,
+input,
+select,
+textarea {
+  border: 0;
+  outline: 0;
+  padding: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}

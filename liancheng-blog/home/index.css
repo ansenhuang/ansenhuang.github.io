@@ -1,0 +1,98 @@
+
+.home h3 {
+  padding: 15px 20px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.note-list {
+  padding: 10px 20px;
+}
+
+.note-list li {
+  padding: 10px 0;
+  border-bottom: 1px dotted #f1f1f1;
+}
+
+.note-list li span {
+  float: right;
+}
+
+.page {
+  overflow: hidden;
+  padding: 10px 20px 20px;
+}
+
+.page button {
+  float: right;
+  font-size: 12px;
+  background-color: #f1f1f1;
+  padding: 6px 12px;
+  margin-left: 6px;
+  border-radius: 3px;
+}
+
+.note h1 {
+  text-align: center;
+  padding: 20px;
+  border-bottom: 1px dashed #d3d3d3;
+}
+
+.notfound h1 {
+  line-height: 300px;
+  text-align: center;
+  font-size: 56px;
+  color: #666;
+}
+
+#App {
+  min-width: 800px;
+}
+
+.view-wrapper {
+  padding-top: 50px;
+  position: relative;
+}
+
+.view-wrapper:after {
+  content: '';
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-color: #f8f9fa;
+}
+
+.view {
+  margin: 20px 200px;
+  background-color: #fff;
+  min-height: 300px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, .1);
+}
+
+.navbar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 50px;
+  z-index: 9;
+  font-size: 16px;
+  color: #909090;
+  background-color: #fff;
+  border-bottom: 1px solid #f1f1f1;
+  padding: 5px 200px;
+}
+
+.navbar a {
+  line-height: 40px;
+  padding: 0 20px;
+}
+
+.navbar .logo {
+  float: left;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
