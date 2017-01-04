@@ -11,6 +11,7 @@
 .note-list li {
   padding: 10px 0;
   border-bottom: 1px dotted #f1f1f1;
+  overflow: hidden;
 }
 
 .note-list li span {
@@ -37,37 +38,39 @@
   border-bottom: 1px dashed #d3d3d3;
 }
 
+.notfound {
+  position: fixed;
+  top: 60px;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+}
+
 .notfound h1 {
-  line-height: 300px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  margin-top: -84px;
   text-align: center;
   font-size: 56px;
-  color: #666;
+  color: #999;
 }
 
 #App {
-  min-width: 800px;
+  min-height: 100%;
 }
 
 .view-wrapper {
-  padding-top: 50px;
-  position: relative;
-}
-
-.view-wrapper:after {
-  content: '';
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
   background-color: #f8f9fa;
+  padding: 60px 0 10px;
+  min-height: 100vh;
 }
 
 .view {
-  margin: 20px 200px;
   background-color: #fff;
-  min-height: 300px;
+  max-width: 900px;
+  margin: 0 auto;
   box-shadow: 0 4px 10px rgba(0, 0, 0, .1);
 }
 
@@ -82,15 +85,20 @@
   color: #909090;
   background-color: #fff;
   border-bottom: 1px solid #f1f1f1;
-  padding: 5px 200px;
+  padding: 5px 20px;
 }
 
-.navbar a {
+.link-list {
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+.link-list a {
   line-height: 40px;
   padding: 0 20px;
 }
 
-.navbar .logo {
+.link-list .logo {
   float: left;
   width: 40px;
   height: 40px;
