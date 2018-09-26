@@ -115,14 +115,14 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" >
+        <li class="chapter " data-level="1.3" data-path="command/">
             
-                <span>
+                <a href="command/">
             
                     
                     命令选项
             
-                </span>
+                </a>
             
 
             
@@ -212,14 +212,14 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" >
+        <li class="chapter " data-level="1.4" data-path="config/">
             
-                <span>
+                <a href="config/">
             
                     
                     工程配置
             
-                </span>
+                </a>
             
 
             
@@ -245,6 +245,19 @@
             
                     
                     页面配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="config/ftl.html">
+            
+                <a href="config/ftl.html">
+            
+                    
+                    ftl配置(java freemarker)
             
                 </a>
             
@@ -359,17 +372,18 @@
 <ul>
 <li>ignore: <code>.min.js</code></li>
 <li>presets:<ul>
-<li>env</li>
-<li>react (for react)</li>
-<li>stage-2</li>
+<li>@babel/preset-env</li>
+<li>@babel/preset-react (for react)</li>
 </ul>
 </li>
 <li>plugins:<ul>
-<li>transform-vue-jsx (for vue)</li>
-<li>transform-decorators-legacy</li>
-<li>transform-runtime</li>
-<li>transform-class-properties (include from stage-2)</li>
-<li>syntax-dynamic-import (include from stage-2)</li>
+<li>babel-plugin-transform-vue-jsx (for vue)</li>
+<li>@babel/plugin-proposal-decorators</li>
+<li>@babel/plugin-proposal-export-namespace-from</li>
+<li>@babel/plugin-syntax-dynamic-import</li>
+<li>@babel/plugin-proposal-class-properties</li>
+<li>@babel/plugin-proposal-json-strings</li>
+<li>@babel/plugin-transform-runtime</li>
 </ul>
 </li>
 </ul>
@@ -416,7 +430,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Babel","level":"1.6","depth":1,"next":{"title":"Eslint","level":"1.7","depth":1,"path":"eslint.md","ref":"eslint.md","articles":[]},"previous":{"title":"PostCSS","level":"1.5","depth":1,"path":"postcss.md","ref":"postcss.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"babel.md","mtime":"2018-07-03T07:28:25.313Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-03T08:18:33.818Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Babel","level":"1.6","depth":1,"next":{"title":"Eslint","level":"1.7","depth":1,"path":"eslint.md","ref":"eslint.md","articles":[]},"previous":{"title":"PostCSS","level":"1.5","depth":1,"path":"postcss.md","ref":"postcss.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"babel.md","mtime":"2018-09-26T08:59:36.585Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-26T09:36:48.031Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

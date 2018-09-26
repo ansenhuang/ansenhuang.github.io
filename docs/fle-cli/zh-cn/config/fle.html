@@ -60,6 +60,8 @@
     <link rel="next" href="app.html" />
     
     
+    <link rel="prev" href="./" />
+    
 
     </head>
     <body>
@@ -113,14 +115,14 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" >
+        <li class="chapter " data-level="1.3" data-path="../command/">
             
-                <span>
+                <a href="../command/">
             
                     
                     命令选项
             
-                </span>
+                </a>
             
 
             
@@ -210,14 +212,14 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" >
+        <li class="chapter " data-level="1.4" data-path="./">
             
-                <span>
+                <a href="./">
             
                     
                     工程配置
             
-                </span>
+                </a>
             
 
             
@@ -243,6 +245,19 @@
             
                     
                     页面配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="ftl.html">
+            
+                <a href="ftl.html">
+            
+                    
+                    ftl配置(java freemarker)
             
                 </a>
             
@@ -371,6 +386,7 @@
   # &#x5F00;&#x53D1;&#x73AF;&#x5883;&#x914D;&#x7F6E; #
 
   &quot;notify&quot;: true,              # &#x7F16;&#x8BD1;&#x51FA;&#x9519;&#x65F6;&#xFF0C;&#x542F;&#x7528;&#x7CFB;&#x7EDF;&#x901A;&#x77E5;
+  &quot;host&quot;: &quot;0.0.0.0&quot;,           # &#x81EA;&#x5B9A;&#x4E49;&#x672C;&#x5730;&#x57DF;&#x540D;&#xFF0C;&#x793A;&#x4F8B;&#x4E2D;&#x7684;&#x57DF;&#x540D;&#x53EF;&#x4EE5;&#x652F;&#x6301;IP&#x8BBF;&#x95EE;
   &quot;port&quot;: 5000,                # &#x672C;&#x5730;&#x5F00;&#x53D1;&#x670D;&#x52A1;&#x5668;&#x7684;&#x7AEF;&#x53E3;&#xFF0C;&#x82E5;&#x7AEF;&#x53E3;&#x88AB;&#x5360;&#x7528;&#x5219;&#x81EA;&#x52A8;&#x66F4;&#x6362;
   &quot;proxy&quot;: {},                 # &#x672C;&#x5730;&#x5F00;&#x53D1;&#x4EE3;&#x7406;&#x914D;&#x7F6E;&#xFF0C;&#x65B9;&#x4FBF;&#x63A5;&#x53E3;&#x8C03;&#x8BD5;
   &quot;historyApiFallback&quot;: true,  # &#x4F7F;&#x7528;&#x524D;&#x7AEF;&#x8DEF;&#x7531;&#xFF08;history&#xFF09;&#xFF0C;&#x6307;&#x5B9A;&#x8DEF;&#x5F84;&#x5230;&#x5BF9;&#x5E94;&#x7684;&#x9875;&#x9762;&#x8DEF;&#x5F84;&#x4E2D;
@@ -383,7 +399,10 @@
   &quot;vendors&quot;: {},               # &#x81EA;&#x5B9A;&#x4E49;&#x9700;&#x8981;&#x5206;&#x5272;&#x7684;&#x4EE3;&#x7801;&#x5757;&#xFF0C;&#x6BCF;&#x4E00;&#x4E2A;&#x952E;&#x5C06;&#x4F1A;&#x5206;&#x5272;&#x51FA;&#x5BF9;&#x5E94;&#x7684;&#x4EE3;&#x7801;&#x5757;&#xFF0C;&#x503C;&#x662F;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x7C7B;&#x578B;&#x7684;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;
   &quot;splitCommon&quot;: true,         # &#x5206;&#x5272;&#x516C;&#x5171;&#x6A21;&#x5757;&#xFF0C;&#x5373;common&#x76EE;&#x5F55;&#x4E0B;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x4F7F;&#x7528;&#x6B21;&#x6570;&#x5728;3&#x6B21;&#x53CA;&#x4EE5;&#x4E0A;&#x4E14;&#x5927;&#x5C0F;&#x8D85;&#x8FC7;30KB&#x624D;&#x4F1A;&#x5206;&#x5272;&#x6210;&#x72EC;&#x7ACB;&#x7684;&#x6587;&#x4EF6;
   &quot;inlineManifest&quot;: true,      # &#x5C06;&#x7F16;&#x8BD1;&#x8FD0;&#x884C;&#x65F6;&#x7684;&#x4EE3;&#x7801;&#x5185;&#x8054;&#x5230;&#x9875;&#x9762;&#x6A21;&#x7248;&#x4E2D;&#xFF0C;&#x5229;&#x4E8E;&#x7F13;&#x5B58;
-  &quot;publicPath&quot;: &quot;/&quot;            # &#x6307;&#x5B9A;&#x7F16;&#x8BD1;&#x540E;&#x7684;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#x5F15;&#x7528;&#x524D;&#x7F00;
+  &quot;publicPath&quot;: &quot;/&quot;,           # &#x6307;&#x5B9A;&#x7F16;&#x8BD1;&#x540E;&#x7684;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#x5F15;&#x7528;&#x524D;&#x7F00;
+
+  # &#x65B0;&#x589E; #
+  &quot;copyPath&quot;: &quot;../template&quot;    # &#x63D0;&#x4F9B;java&#x6A21;&#x7248;&#xFF08;ftl&#xFF09;&#x7684;&#x81EA;&#x5B9A;&#x4E49;&#x914D;&#x7F6E;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#x6216;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x5C06;ftl&#x6587;&#x4EF6;&#x6253;&#x5305;&#x5230;&#x6307;&#x5B9A;&#x7684;&#x76EE;&#x5F55;&#xFF0C;&#x914D;&#x5408;java&#x670D;&#x52A1;&#x8FDB;&#x884C;&#x672C;&#x5730;&#x6D4B;&#x8BD5;
 }
 </code></pre>
 <p>&#x8865;&#x5145;&#x8BF4;&#x660E;&#xFF1A;</p>
@@ -430,8 +449,12 @@
 
             
                 
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 工程配置">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="app.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 页面配置">
+                
+                <a href="app.html" class="navigation navigation-next " aria-label="Next page: 页面配置">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -442,7 +465,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"项目配置","level":"1.4.1","depth":2,"next":{"title":"页面配置","level":"1.4.2","depth":2,"path":"config/app.md","ref":"config/app.md","articles":[]},"previous":{"title":"工程配置","level":"1.4","depth":1,"ref":"","articles":[{"title":"项目配置","level":"1.4.1","depth":2,"path":"config/fle.md","ref":"config/fle.md","articles":[]},{"title":"页面配置","level":"1.4.2","depth":2,"path":"config/app.md","ref":"config/app.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"config/fle.md","mtime":"2018-07-03T06:40:27.647Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-03T08:18:33.818Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"项目配置","level":"1.4.1","depth":2,"next":{"title":"页面配置","level":"1.4.2","depth":2,"path":"config/app.md","ref":"config/app.md","articles":[]},"previous":{"title":"工程配置","level":"1.4","depth":1,"path":"config/README.md","ref":"config/README.md","articles":[{"title":"项目配置","level":"1.4.1","depth":2,"path":"config/fle.md","ref":"config/fle.md","articles":[]},{"title":"页面配置","level":"1.4.2","depth":2,"path":"config/app.md","ref":"config/app.md","articles":[]},{"title":"ftl配置(java freemarker)","level":"1.4.3","depth":2,"path":"config/ftl.md","ref":"config/ftl.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"config/fle.md","mtime":"2018-09-26T09:07:42.771Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-26T09:36:48.031Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
